@@ -86,9 +86,9 @@ namespace dpTools
 			if (val is decimal)
 				return (decimal) val;
 
-			if (val is double)
+			if (val is double || val is long)
 				return Convert.ToDecimal(val);
-
+			
 			if (val is DBNull)
 				return 0;
 
