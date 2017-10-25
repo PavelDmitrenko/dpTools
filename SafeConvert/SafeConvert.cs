@@ -11,23 +11,43 @@ namespace dpTools
 
 		public static bool ToBool(object s)
 		{
+			switch (s)
+			{
+				case DBNull _:
+				{
+					return false;
+				}
 
-			if (s is bool?)
-			{
-				var v = (bool?) s;
-				return v == true;
+				case bool val:
+				{
+					return val;
+				}
+				case int val:
+				{
+					return val == 1;
+				}
+				case short val:
+				{
+					return val == 1;
+				}
+				case byte val:
+				{
+					return val == 1;
+				}
+				case long val:
+				{
+					return val == 1;
+				}
+				case string val:
+				{
+					if (int.TryParse(val, out int num))
+						return num == 1;
+
+						return val.Equals("TRUE", StringComparison.CurrentCultureIgnoreCase);
+				}
 			}
 
-			if (s is int)
-			{
-				int i = (int) s;
-				return i != 0 && (i == 1 ? true : false);
-			}
-			if (s is DBNull)
-			{
-				return false;
-			}
-			throw new Exception("Неизвестный тип Bool");
+			throw new Exception("Unknown Bool type");
 		}
 
 		#endregion
